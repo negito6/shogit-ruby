@@ -38,7 +38,14 @@ module Shogit
       commit("△ ", position, piece, *args)
     end
 
-    def show(index)
+    def show(_index)
+      delta = 5 # TODO: default
+      index = formatted_index(_index)
+      ([index - delta, 1].max..[index + delta, count].min).map do |i|
+        # TODO: lines
+        puts formatted_move file.lines[i-1], i
+      end
+      nil
     end
 
     def convert(word)
@@ -60,6 +67,14 @@ module Shogit
 
     def formatted_move(message, index)
       "#{index} #{message}"
+    end
+
+    def formatted_index(index)
+      if index < 1
+        count + index
+      else
+        index
+      end
     end
 
     def count
