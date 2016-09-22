@@ -99,7 +99,7 @@ module Shogit
       if index < 1
         index
       else
-        count - index
+        index - count
       end
     end
 
