@@ -31,11 +31,11 @@ module Shogit
     }
 
     def sente(position, piece, *args)
-      chakushu("▲", position, piece, *args)
+      commit("▲", position, piece, *args)
     end
 
     def gote(position, piece, *args)
-      chakushu("△ ", position, piece, *args)
+      commit("△ ", position, piece, *args)
     end
 
     def show(index)
@@ -49,7 +49,7 @@ module Shogit
       convert(method) || super
     end
 
-    def chakushu(mark, position, piece, *args)
+    def commit(mark, position, piece, *args)
       suji = position / 10
       dan = ["","一","二","三","四","五","六","七","八","九"].fetch(position % 10)
       m = "#{mark}#{suji}#{dan}#{piece}#{args.join('')}".tap do |message|
