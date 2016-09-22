@@ -35,7 +35,7 @@ module Shogit
     end
 
     def gote(position, piece, *args)
-      commit("△ ", position, piece, *args)
+      commit("△", position, piece, *args)
     end
 
     def show(_index)
