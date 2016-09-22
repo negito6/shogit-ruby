@@ -64,7 +64,8 @@ module Shogit
 
     def branch(_index)
       head = relative_index(_index).to_s[1..-1]
-      new_branch_name = "#{git.current_branch_name}-#{head}_#{Time.now.to_i}"
+      index = formatted_index(_index)
+      new_branch_name = "#{git.current_branch_name}-#{index}_#{Time.now.to_i}"
       git.checkout_b(new_branch_name, head)
       show(count)
     end
