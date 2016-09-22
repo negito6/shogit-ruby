@@ -52,6 +52,13 @@ module Shogit
       WORDS[word] if WORDS.key?(word)
     end
 
+    def branch(_index)
+      head = relative_index(_index).to_s[1,]
+      new_branch_name = "#{git.current_branch_name}-#{head}_#{Time.now.to_i}"
+      git.checkout_b(new_branch_name, head)
+      "game on #{new_branch_name}"
+    end
+
     def method_missing(method, *args)
       convert(method) || super
     end
@@ -74,6 +81,14 @@ module Shogit
         count + index
       else
         index
+      end
+    end
+
+    def relative_index(index)
+      if index < 1
+        index
+      else
+        count - index
       end
     end
 
@@ -108,6 +123,19 @@ module Shogit
 
     def git_user
       { :email => "testuser@github.com", :name => 'Test Author' }
+    end
+
+    def current_branch_name
+      repo.head.name.split("/").last
+    end
+
+    def checkout(branch_name)
+      repo.checkout(branch_name)
+    end
+
+    def checkout_b(new_branch_name, head)
+      repo.branches.create(new_branch_name, "HEAD~#{head}")
+      checkout(new_branch_name)
     end
 
     def add_and_commit(file, message)
