@@ -53,8 +53,21 @@ module Shogit
       suji = position / 10
       dan = ["","一","二","三","四","五","六","七","八","九"].fetch(position % 10)
       "#{mark}#{suji}#{dan}#{piece}#{args.join('')}".tap do |message|
-        # save(message)
+        save(message)
       end
+    end
+
+    def save(message)
+      file.add(message)
+      git.add_and_commit(file, message)
+    end
+
+    def git
+      @git ||= Git.new
+    end
+
+    def file
+      @file ||= File.new
     end
   end
 
@@ -110,6 +123,12 @@ module Shogit
 
     def touch
       ::File.open(path, "w") do |f|
+      end
+    end
+
+    def add(message)
+      ::File.open(path, "a") do |f|
+        f.puts message
       end
     end
 
