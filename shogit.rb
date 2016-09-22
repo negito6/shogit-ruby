@@ -45,7 +45,7 @@ module Shogit
         # TODO: lines
         puts formatted_move file.lines[i-1], i
       end
-      nil
+      "game on #{git.current_branch_name}"
     end
 
     def convert(word)
@@ -60,14 +60,13 @@ module Shogit
     def checkout(branch_name=nil)
       git.checkout(branch_name)
       show(count)
-      "game on #{git.current_branch_name}"
     end
 
     def branch(_index)
       head = relative_index(_index).to_s[1,]
       new_branch_name = "#{git.current_branch_name}-#{head}_#{Time.now.to_i}"
       git.checkout_b(new_branch_name, head)
-      "game on #{new_branch_name}"
+      show(count)
     end
 
     def method_missing(method, *args)
