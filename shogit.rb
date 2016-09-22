@@ -52,6 +52,11 @@ module Shogit
       WORDS[word] if WORDS.key?(word)
     end
 
+    def start(name=Time.now.to_i)
+      git.checkout_b(name.to_s, count)
+      "game on #{name}"
+    end
+
     def branch(_index)
       head = relative_index(_index).to_s[1,]
       new_branch_name = "#{git.current_branch_name}-#{head}_#{Time.now.to_i}"
