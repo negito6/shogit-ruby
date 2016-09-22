@@ -52,9 +52,18 @@ module Shogit
     def chakushu(mark, position, piece, *args)
       suji = position / 10
       dan = ["","一","二","三","四","五","六","七","八","九"].fetch(position % 10)
-      "#{mark}#{suji}#{dan}#{piece}#{args.join('')}".tap do |message|
+      m = "#{mark}#{suji}#{dan}#{piece}#{args.join('')}".tap do |message|
         save(message)
       end
+      formatted_move(m, count)
+    end
+
+    def formatted_move(message, index)
+      "#{index} #{message}"
+    end
+
+    def count
+      file.count_lines
     end
 
     def save(message)
@@ -140,6 +149,14 @@ module Shogit
       ::File.open(path, "r") do |f|
         return f.read
       end
+    end
+
+    def lines
+      content.split("\n")
+    end
+
+    def count_lines
+      lines.count
     end
   end
 end
