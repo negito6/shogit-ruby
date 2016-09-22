@@ -57,6 +57,12 @@ module Shogit
       "game on #{name}"
     end
 
+    def checkout(branch_name=nil)
+      git.checkout(branch_name)
+      show(count)
+      "game on #{git.current_branch_name}"
+    end
+
     def branch(_index)
       head = relative_index(_index).to_s[1,]
       new_branch_name = "#{git.current_branch_name}-#{head}_#{Time.now.to_i}"
@@ -134,8 +140,12 @@ module Shogit
       repo.head.name.split("/").last
     end
 
-    def checkout(branch_name)
-      repo.checkout(branch_name)
+    def stem_name
+      current_branch_name.split("-").first
+    end
+
+    def checkout(branch_name=nil)
+      repo.checkout(branch_name || stem_name)
     end
 
     def checkout_b(new_branch_name, head)
