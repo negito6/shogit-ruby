@@ -43,7 +43,8 @@ module Shogit
       index = formatted_index(_index)
       ([index - delta, 1].max..[index + delta, count].min).map do |i|
         # TODO: lines
-        puts formatted_move file.lines[i-1], i
+        counter = i == index ? ">>> #{i}" : "    #{i}"
+        puts formatted_move file.lines[i-1], counter
       end
       "game on #{git.current_branch_name}"
     end
