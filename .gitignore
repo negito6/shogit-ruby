@@ -1,3 +1,4 @@
 vendor
 .bundle
 data
+Gemfile.lock

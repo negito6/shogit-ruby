@@ -2,7 +2,7 @@
 
 require 'irb'
 require 'irb/completion'
-require './lib/shogit'
+require 'shogit'
 
 console = IRB
 console::ExtendCommandBundle.include(Shogit::Console)

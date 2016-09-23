@@ -1,4 +1,5 @@
 require 'rugged'
+require "shogit/version"
 
 module Shogit
   module Console

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/shogit'
+require 'shogit'
 
 git = Shogit::Git.new
 Shogit::File.new.touch
