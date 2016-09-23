@@ -1,4 +1,4 @@
-require './shogit'
+require './lib/shogit'
 
 git = Shogit::Git.new
 Shogit::File.new.touch
